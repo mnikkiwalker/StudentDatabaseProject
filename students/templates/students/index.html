@@ -1,0 +1,81 @@
+{% load static %} <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width initial-scale=1.0">
+    <link rel="stylesheet" href="{%static 'students/style.css'%}">
+    <title>Document</title>
+</head>
+    
+<body>
+    
+    <div class="allContentContainer">
+        <h1>Student Database Project</h1>
+        <!--Header elements-->
+        <div class="headerGrid">
+
+            <!--Form elements-->
+            <div>
+                <h2>Enter Student Information</h2>
+
+                <!--Input Form-->
+                <form method="POST" action="{% url 'submitButton' %}">
+
+                    {% csrf_token %}
+
+                    <div class="studentInputGrid">
+                        <label class="inputLabel">First Name:</label>
+                        <input class="input" type="text" name="firstName" value="{{ formData.firstName|default:'' }}">
+                        <label class="inputLabel">Last Name:</label>
+                        <input class="input" type = "text" name="lastName" value="{{ formData.lastName|default:'' }}">
+                        <label class="inputLabel">Grade:</label>
+                        <input class="gradeInput" type = "number" name="grade" step="1" value="{{ formData.grade|default:'' }}">
+
+                        <button type="submit" class="submitButton">Submit</button>
+                    </div>
+                </form>
+
+                <!--Error block-->
+                <div class="errorBlock">
+                    {% for errors in errorList %}
+                        <div>{{ errors }}</div><br>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!--Display Metrics-->
+            <div>
+                <h2>Class Metrics</h2>
+                <div class="metricGridContainer">
+                    <label class="studentGridColumnHeader">Student Count:</label>
+                    <label class="metric">{{studentCount}}</label>
+                    <label class="studentGridColumnHeader">Lowest Grade:</label>
+                    <label class="metric">{{minGrade}}</label>
+                    <label class="studentGridColumnHeader">Highest Grade:</label>
+                    <label class="metric">{{maxGrade}}</label>
+                    <label class="studentGridColumnHeader">Average Grade:</label>
+                    <label class="metric">{{avgGrade}}</label>
+                </div>
+            </div>
+        </div>
+
+        <!--created students-->
+        <div class="studentContainerFrame">
+            <h2>Registered Students</h2>
+            <div class="studentGridContainer">
+                <div>Id</div>
+                <div>First Name</div>
+                <div>Last Name</div>
+                <div>Grade</div>
+            
+                {% for student in studentList %}
+                    <div>{{ student.studentId }}</div>
+                    <div>{{ student.firstName }}</div>
+                    <div>{{ student.lastName }}</div>
+                    <div>{{ student.grade }}</div>
+                {% endfor %}
+            </div>
+        </div>
+</div>
+</body>
+</html>
