@@ -51,7 +51,7 @@ MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
-ROOT_URLCONF = 'IN350M4_LeoanrdWalker.urls'
+ROOT_URLCONF = 'StudentDatabaseProject.urls'
 
 TEMPLATES = [
     {
@@ -68,7 +68,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'IN350M4_LeoanrdWalker.wsgi.application'
+WSGI_APPLICATION = 'StudentDatabaseProject.wsgi.application'
 
 
 # Database
