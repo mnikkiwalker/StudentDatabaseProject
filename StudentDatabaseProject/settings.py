@@ -27,9 +27,7 @@ DEBUG = False
 
 ALLOWED_HOSTS = ['*']  # Railway domain
 CSRF_TRUSTED_ORIGINS = [
-    'studentdatabaseproject-production.up.railway.app',
-    # if you want, you can also use the wildcard:
-    # 'https://*.up.railway.app',
+    'https://studentdatabaseproject-production.up.railway.app',
 ]
 
 
