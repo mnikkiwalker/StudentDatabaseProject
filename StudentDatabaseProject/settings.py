@@ -26,6 +26,11 @@ SECRET_KEY = 'django-insecure-(m0+2gb0ha90^xvwrkm2#i+=p(4mw9ux_0s3rj2ogi!mwi=hsz
 DEBUG = False
 
 ALLOWED_HOSTS = ['*']  # Railway domain
+CSRF_TRUSTED_ORIGINS = [
+    'https://your-app-name.up.railway.app',
+    # if you want, you can also use the wildcard:
+    # 'https://*.up.railway.app',
+]
 
 
 # Application definition
