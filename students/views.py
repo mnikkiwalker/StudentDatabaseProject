@@ -35,6 +35,10 @@ def validateStudentData(request):
     lastName = request.POST.get('lastName')
     grade = request.POST.get('grade')
 
+    if Student.objects.count() >= 20:
+        errorList.append('Student maximum has been reached')
+        return request, errorList
+
     #confirms name is not empty
     if not firstName:
         errorList.append('First Name is required')
