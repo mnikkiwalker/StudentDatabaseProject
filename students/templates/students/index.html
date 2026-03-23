@@ -61,7 +61,13 @@
 
         <!--created students-->
         <div class="studentContainerFrame">
-            <h2>Registered Students</h2>
+            <div class="registeredStudentsHeaderGrid">
+                <h2>Registered Students</h2>
+                <form  action="{% url 'clearButton' %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit">Clear Students</button>
+                </form>
+            </div>
             <div class="studentGridContainer">
                 <div>Id</div>
                 <div>First Name</div>

@@ -9,10 +9,20 @@ def home_view(request, errorList=None, formData=None):
 
     studentList = Student.objects.all().order_by('-studentId')
     studentCount = Student.objects.count()
-    minGrade = Student.objects.aggregate(Min('grade'))['grade__min']
-    maxGrade = Student.objects.aggregate(Max('grade'))['grade__max']
-    avgGrade = Student.objects.aggregate(Avg('grade'))['grade__avg']
-    avgGrade = int(avgGrade)
+
+    if studentCount > 0:
+        minGrade = Student.objects.aggregate(Min('grade'))['grade__min']
+        maxGrade = Student.objects.aggregate(Max('grade'))['grade__max']
+        avgGrade = Student.objects.aggregate(Avg('grade'))['grade__avg']
+        avgGrade = int(avgGrade)
+    else:
+        minGrade = None
+        maxGrade = None
+        avgGrade = None
+
+    if studentCount >= 20:
+        errorList = ['Student maximum has been reached']
+
     print(f"MinGrade: {minGrade}")
     return render(request
             , 'students/index.html' 
@@ -36,7 +46,9 @@ def validateStudentData(request):
     grade = request.POST.get('grade')
 
     if Student.objects.count() >= 20:
+        print("validation complete")
         errorList.append('Student maximum has been reached')
+        print(f"errors found: {errorList}")
         return request, errorList
 
     #confirms name is not empty
@@ -87,7 +99,14 @@ def submitButton(request):
 
     #if there are errors
     else:
-        return home_view(request, errors, request.POST)
+        if Student.objects.count() >= 20:
+            return redirect('home')
+        else:
+            return home_view(request, errors, request.POST)
+    
+def clearStudentsButton(request):
+    Student.objects.all().delete()
+    return redirect('home')
 
     
 

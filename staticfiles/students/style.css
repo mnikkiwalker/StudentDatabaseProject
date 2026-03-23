@@ -2,6 +2,7 @@ html, body{
     min-height: 100vh;
     margin: 0;
     background-color: #262121;
+    /* background-color: red; */
 }
 
 .allContentContainer{
@@ -62,11 +63,17 @@ html, body{
     width: 100%;
     box-sizing: border-box;
     padding: 10px;
+    border: 5px solid black;
 }
 
-.studentContainerFrame h2 {
-    margin-top: 0;
-    margin-bottom: 5;
+.registeredStudentsHeaderGrid {
+    display: grid;
+    width: 100%;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    border: 5px solid red;
+    padding: 10px;
+    box-sizing: border-box;
 }
 
 .studentGridContainer{
